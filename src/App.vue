@@ -3,7 +3,17 @@
     <header><h1>My Friends</h1></header>
     <ul>
       <li>
-        <friend-contact></friend-contact>
+        <friend-contact 
+        v-for="friend in friends"
+        :key="friend.id"
+        :id="friend.id"
+        :name="friend.name"
+        :phone-Number='friend.phone' 
+        :email='friend.email'
+        :isFavourite='true'
+        @toggle-favourite="toggleFavouriteStatus"
+        >
+        </friend-contact>
       </li>
     </ul>
   </section>
@@ -28,6 +38,12 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    toggleFavouriteStatus(friendId){
+     const identifiedFriend=this.friends.find(friend => friend.id === friendId);
+     identifiedFriend.isFavourite =! identifiedFriend.isFavourite
+    }
   }
 };
 </script>
